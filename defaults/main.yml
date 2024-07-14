@@ -1,0 +1,17 @@
+# Some parameters are not allowed to set inside PVE container.
+# Let's just set them on the host for now.
+sysctl_param_host:
+    # increase netdev_budget, otherwise netdata will generate softnet_stat alarm
+    net.core.netdev_budget: 500
+    net.core.netdev_budget_usecs: 5000
+    # Increase conntrack table size to 256K.
+    net.netfilter.nf_conntrack_max: 262144
+    # Enable BBR.
+    net.core.default_qdisc: cake
+    net.ipv4.tcp_congestion_control: bbr
+
+sysctl_param:
+    net.ipv4.ip_forward: 1
+    net.ipv6.conf.all.forwarding: 1
+    net.ipv4.tcp_fastopen: 3
+    net.ipv4.tcp_syncookies: 1

@@ -1,0 +1,15 @@
+# If running inside LXC container, some sysctl parameters can only be set
+# on host system instead of inside container.
+# Put host name inside "lxc_container" group in ansible inventory to mark this.
+- name: set sysctl parameter on host
+  sysctl: name={{ item.key }} value={{ item.value }} state=present reload=true sysctl_file=/etc/sysctl.d/99-sysctl.conf
+  with_dict: "{{ sysctl_host_param }}"
+  when: "'router' in group_names and 'lxc_container' not in group_names"
+
+- meta: end_host
+  when: "'pve_host' in group_names"
+
+# Note: Arch Linux no longer uses /etc/sysctl.conf.
+- name: set sysctl parameters
+  sysctl: name={{ item.key }} value={{ item.value }} state=present reload=true sysctl_file=/etc/sysctl.d/99-sysctl.conf
+  with_dict: "{{ sysctl_param }}"
