@@ -4,7 +4,7 @@ sysctl_param_host:
     # increase netdev_budget, otherwise netdata will generate softnet_stat alarm
     net.core.netdev_budget: 500
     net.core.netdev_budget_usecs: 5000
-    # Increase conntrack table size to 256K.
+    # Increase conntrack table size to 256K. This requires nf_conntrack module.
     net.netfilter.nf_conntrack_max: 262144
     # Enable BBR.
     net.core.default_qdisc: cake
