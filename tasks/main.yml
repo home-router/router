@@ -3,8 +3,8 @@
 # Put host name inside "lxc_container" group in ansible inventory to mark this.
 - name: Set sysctl parameter on host
   ansible.posix.sysctl:
-    name: {{ item.key }}
-    value: {{ item.value }}
+    name: "{{ item.key }}"
+    value: "{{ item.value }}"
     state: present
     reload: true
     sysctl_file: /etc/sysctl.d/99-sysctl.conf
@@ -17,8 +17,8 @@
 # Note: Arch Linux no longer uses /etc/sysctl.conf.
 - name: Set sysctl parameters
   ansible.posix.sysctl:
-    name: {{ item.key }}
-    value: {{ item.value }}
+    name: "{{ item.key }}"
+    value: "{{ item.value }}"
     state: present
     reload: true
     sysctl_file: /etc/sysctl.d/99-sysctl.conf
